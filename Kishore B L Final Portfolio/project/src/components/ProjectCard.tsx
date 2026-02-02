@@ -1,4 +1,5 @@
 import { ExternalLink, Github } from 'lucide-react';
+import GlassButton from './GlassButton';
 import GlassCard from './GlassCard';
 
 type ProjectCardProps = {
@@ -28,14 +29,14 @@ const ProjectCard = ({ title, description, tags, demo, github }: ProjectCardProp
       </div>
       <div className="mt-auto flex flex-wrap gap-3">
         {demo ? (
-          <a className="glass-button" href={demo} target="_blank" rel="noreferrer">
+          <GlassButton href={demo} target="_blank" rel="noreferrer">
             Live Demo <ExternalLink size={14} />
-          </a>
+          </GlassButton>
         ) : null}
         {github ? (
-          <a className="glass-button" href={github} target="_blank" rel="noreferrer">
+          <GlassButton href={github} target="_blank" rel="noreferrer">
             GitHub <Github size={14} />
-          </a>
+          </GlassButton>
         ) : null}
       </div>
     </GlassCard>

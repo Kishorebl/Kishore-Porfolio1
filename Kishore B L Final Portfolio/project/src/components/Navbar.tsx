@@ -1,5 +1,5 @@
 import { Menu } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 
 const navLinks = [
@@ -12,6 +12,31 @@ const navLinks = [
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState('#about');
+
+  useEffect(() => {
+    const sections = navLinks
+      .map((link) => document.querySelector(link.href))
+      .filter((section): section is HTMLElement => Boolean(section));
+
+    if (!sections.length) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(`#${entry.target.id}`);
+          }
+        });
+      },
+      { rootMargin: '-40% 0px -50% 0px', threshold: 0.1 }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/30 bg-white/60 backdrop-blur-2xl dark:border-white/10 dark:bg-slate-950/60">
@@ -21,7 +46,13 @@ const Navbar = () => {
         </a>
         <nav className="hidden items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-200 md:flex">
           {navLinks.map((link) => (
-            <a key={link.href} href={link.href} className="transition hover:text-slate-900 dark:hover:text-white">
+            <a
+              key={link.href}
+              href={link.href}
+              className={`transition hover:text-slate-900 dark:hover:text-white ${
+                active === link.href ? 'text-slate-900 dark:text-white' : ''
+              }`}
+            >
               {link.label}
             </a>
           ))}
@@ -45,7 +76,9 @@ const Navbar = () => {
               <a
                 key={link.href}
                 href={link.href}
-                className="rounded-lg px-3 py-2 transition hover:bg-white/70 dark:hover:bg-white/10"
+                className={`rounded-lg px-3 py-2 transition hover:bg-white/70 dark:hover:bg-white/10 ${
+                  active === link.href ? 'bg-white/70 text-slate-900 dark:bg-white/10 dark:text-white' : ''
+                }`}
                 onClick={() => setOpen(false)}
               >
                 {link.label}

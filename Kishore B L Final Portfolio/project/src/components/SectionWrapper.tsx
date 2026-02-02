@@ -21,6 +21,7 @@ const SectionWrapper = ({ id, eyebrow, title, subtitle, children }: SectionWrapp
           {subtitle ? <p className="section-subtitle">{subtitle}</p> : null}
         </div>
         {children}
+        <div className="h-px w-full bg-gradient-to-r from-transparent via-white/30 to-transparent dark:via-white/10" />
       </div>
     </section>
   );

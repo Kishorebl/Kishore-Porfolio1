@@ -6,7 +6,6 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],
-        display: ['"Playfair Display"', 'serif'],
       },
       colors: {
         glass: {
