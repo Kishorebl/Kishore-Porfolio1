@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Designs - Kishore B L</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        /* Navigation Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #666;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #007bff;
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: #007bff;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background: #333;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding-top: 100px;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 40px 20px;
+            background: #0056b3;
+            color: white;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .page-subtitle {
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+
+        /* Design Layout */
+        .design-layout {
+            display: flex;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            gap: 30px;
+        }
+
+        /* Sidebar */
+        .design-sidebar {
+            width: 250px;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            position: sticky;
+            top: 120px;
+        }
+
+        .sidebar-title {
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .category-btn {
+            display: block;
+            width: 100%;
+            padding: 12px 20px;
+            margin-bottom: 10px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-weight: 500;
+            color: #555;
+            text-align: left;
+            border-left: 3px solid transparent;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #f0f4ff;
+            color: #0056b3;
+            border-left-color: #0056b3;
+        }
+
+        /* Content Area */
+        .design-content {
+            flex: 1;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+        }
+
+        /* Design Sections */
+        .design-section {
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.4s ease;
+        }
+
+        .design-section.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .design-card {
+            background: #f9f9f9;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+            transition: transform 0.3s ease;
+        }
+
+        .design-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .design-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .design-info {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .design-title {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 5px;
+        }
+
+        .design-category {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* Coming Soon Styles */
+        .coming-soon {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+            font-size: 1.1rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border: 2px dashed #ddd;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 40px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                left: -100%;
+                top: 70px;
+                flex-direction: column;
+                background-color: white;
+                width: 100%;
+                text-align: center;
+                transition: 0.3s;
+                box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
+                padding: 2rem 0;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active .bar:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active .bar:nth-child(1) {
+                transform: translateY(8px) rotate(45deg);
+            }
+
+            .hamburger.active .bar:nth-child(3) {
+                transform: translateY(-8px) rotate(-45deg);
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .design-layout {
+                flex-direction: column;
+                padding: 20px;
+            }
+
+            .design-sidebar {
+                width: 100%;
+                position: static;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Kishore B L</a>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="index.html" class="nav-link">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="designs.html" class="nav-link active">Designs</a>
+                </li>
+                <li class="nav-item">
+                    <a href="experience.html" class="nav-link">Experience</a>
+                </li>
+                <li class="nav-item">
+                    <a href="education.html" class="nav-link">Education</a>
+                </li>
+                <li class="nav-item">
+                    <a href="contact.html" class="nav-link">Contact</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title" id="pageTitle">Brand Logo Design Portfolio</h1>
+            <p class="page-subtitle" id="pageSubtitle">Professional logo designs showcasing brand identity and visual communication excellence</p>
+        </div>
+
+        <!-- Design Layout -->
+        <div class="design-layout">
+            <!-- Sidebar -->
+            <aside class="design-sidebar">
+                <h3 class="sidebar-title">Design Categories</h3>
+                <button class="category-btn active" onclick="showSection(event, 'brand-logo')">🎨 Brand Logo Design</button>
+                <button class="category-btn" onclick="showSection(event, 'desktop-ui')">🖥️ Desktop UI Design</button>
+                <button class="category-btn" onclick="showSection(event, 'event-posters')">📋 Event Posters</button>
+                <button class="category-btn" onclick="showSection(event, 'web-interface')">🌐 Web Interface</button>
+                <button class="category-btn" onclick="showSection(event, 'icon-set')">⭐ Icon Set Design</button>
+            </aside>
+
+            <!-- Content Area -->
+            <main class="design-content">
+                <!-- Brand Logo Section -->
+                <section id="brand-logo" class="design-section active">
+                    <div class="section-header">
+                        <h2 class="section-title">🎨 Brand Logo Design</h2>
+                        <p class="section-subtitle">Professional logo designs showcasing brand identity and visual communication excellence</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="design-card">
+                            <img src="https://raw.githubusercontent.com/ak31e/Images-of-Portfolio-/main/Logo%201.png" alt="Logo 1">
+                            <div class="design-info">
+                                <h3 class="design-title">Corporate Brand Logo</h3>
+                                <p class="design-category">Brand Identity</p>
+                            </div>
+                        </div>
+                        <div class="design-card">
+                            <img src="https://raw.githubusercontent.com/ak31e/Images-of-Portfolio-/main/Logo%202.jpg" alt="Logo 2">
+                            <div class="design-info">
+                                <h3 class="design-title">Modern Tech Logo</h3>
+                                <p class="design-category">Brand Identity</p>
+                            </div>
+                        </div>
+                        <div class="design-card">
+                            <img src="https://raw.githubusercontent.com/ak31e/Images-of-Portfolio-/main/Logo%203.png" alt="Logo 3">
+                            <div class="design-info">
+                                <h3 class="design-title">Creative Studio Logo</h3>
+                                <p class="design-category">Brand Identity</p>
+                            </div>
+                        </div>
+                        <div class="design-card">
+                            <img src="https://raw.githubusercontent.com/ak31e/Images-of-Portfolio-/main/Logo%204.jpg" alt="Logo 4">
+                            <div class="design-info">
+                                <h3 class="design-title">Business Logo</h3>
+                                <p class="design-category">Brand Identity</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Desktop UI Section -->
+                <section id="desktop-ui" class="design-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🖥️ Desktop UI Design</h2>
+                        <p class="section-subtitle">User interface layouts designed for desktop platforms and software.</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="coming-soon">
+                            <p>🚀 Coming Soon...</p>
+                            <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Desktop UI designs will be added here soon.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Event Posters Section -->
+                <section id="event-posters" class="design-section">
+                    <div class="section-header">
+                        <h2 class="section-title">📋 Event Posters</h2>
+                        <p class="section-subtitle">Creative and impactful posters for events, promotions, and campaigns.</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="coming-soon">
+                            <p>🎨 Coming Soon...</p>
+                            <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Event poster designs will be showcased here soon.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Web Interface Section -->
+                <section id="web-interface" class="design-section">
+                    <div class="section-header">
+                        <h2 class="section-title">🌐 Web Interface</h2>
+                        <p class="section-subtitle">Website layout and structure designs including navigation flows.</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="coming-soon">
+                            <p>🌐 Coming Soon...</p>
+                            <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Web interface designs will be added here soon.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Icon Set Section -->
+                <section id="icon-set" class="design-section">
+                    <div class="section-header">
+                        <h2 class="section-title">⭐ Icon Set Design</h2>
+                        <p class="section-subtitle">Custom icon sets designed for clarity and functionality.</p>
+                    </div>
+                    <div class="gallery-grid">
+                        <div class="coming-soon">
+                            <p>🎨 Coming Soon...</p>
+                            <p style="font-size: 0.9rem; margin-top: 10px; opacity: 0.7;">Icon set designs will be showcased here soon.</p>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </main>
+
+    <script>
+        function showSection(event, sectionId) {
+      document.querySelectorAll('.design-section').forEach(section => {
+        section.classList.remove('active');
+      });
+      document.getElementById(sectionId).classList.add('active');
+
+      document.querySelectorAll('.category-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.currentTarget.classList.add('active');
+
+      const headerMap = {
+        'brand-logo': {
+          title: 'Brand Logo Design Portfolio',
+          subtitle: 'Professional logo designs showcasing brand identity and visual communication excellence'
+        },
+        'desktop-ui': {
+          title: 'Desktop UI Design Portfolio',
+          subtitle: 'User interface layouts designed for desktop platforms and software.'
+        },
+        'event-posters': {
+          title: 'Event Posters Portfolio',
+          subtitle: 'Creative and impactful posters for events, promotions, and campaigns.'
+        },
+        'web-interface': {
+          title: 'Web Interface Design Portfolio',
+          subtitle: 'Website layout and structure designs including navigation flows.'
+        },
+        'icon-set': {
+          title: 'Icon Set Design Portfolio',
+          subtitle: 'Custom icon sets designed for clarity and functionality.'
+        }
+      };
+
+      const pageTitle = document.getElementById('pageTitle');
+      const pageSubtitle = document.getElementById('pageSubtitle');
+
+      if (headerMap[sectionId]) {
+        pageTitle.textContent = headerMap[sectionId].title;
+        pageSubtitle.textContent = headerMap[sectionId].subtitle;
+      }
+    }
+    </script>
+</body>
+</html>

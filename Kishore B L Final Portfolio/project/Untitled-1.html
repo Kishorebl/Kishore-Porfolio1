@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Tools</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --text-color: #333;
+            --bg-color: #f8f8f8;
+            --card-bg: #fff;
+            --border-color: #eee;
+            --shadow-light: rgba(0, 0, 0, 0.08);
+            --shadow-medium: rgba(0, 0, 0, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1 {
+            color: var(--primary-color);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .tool-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px var(--shadow-light);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            border: 1px solid var(--border-color);
+            overflow: hidden; /* For animations that might expand */
+        }
+
+        .tool-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 8px 25px var(--shadow-medium);
+        }
+
+        .tool-icon {
+            width: 80px;
+            height: 80px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: var(--primary-color);
+            position: relative;
+            transform-origin: center;
+        }
+
+        .tool-card h2 {
+            font-size: 1.4em;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        /* Figma Icon Styling & Animation */
+        .tool-icon.figma {
+            color: #1a1a1a; /* Figma dark color */
+        }
+        .tool-icon.figma svg {
+            width: 100%;
+            height: 100%;
+            transform: rotate(0deg);
+            transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+        .tool-card:hover .tool-icon.figma svg {
+            transform: rotate(360deg);
+        }
+        .figma-f path:nth-child(1) { fill: #f24e1e; }
+        .figma-f path:nth-child(2) { fill: #ff7262; }
+        .figma-f path:nth-child(3) { fill: #a259ff; }
+        .figma-f path:nth-child(4) { fill: #1abcfe; }
+        .figma-f path:nth-child(5) { fill: #0acf83; }
+
+
+        /* Pen Tool Styling & Animation */
+        .tool-icon.pen-tool {
+            font-size: 60px; /* Adjust for better fit */
+            color: #e74c3c; /* Reddish tone for pen */
+            transition: all 0.3s ease;
+        }
+        .tool-icon.pen-tool svg {
+            stroke: currentColor; /* Use current color for stroke */
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+            width: 100%;
+            height: 100%;
+            transform: rotate(-45deg) translateY(0);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .tool-card:hover .tool-icon.pen-tool svg {
+            transform: rotate(-60deg) translateY(-5px);
+        }
+
+        /* Crop Tool Styling & Animation */
+        .tool-icon.crop-tool {
+            color: #34495e; /* Darker shade */
+            transition: all 0.3s ease;
+        }
+        .tool-icon.crop-tool svg {
+            fill: currentColor;
+            width: 100%;
+            height: 100%;
+            transform: scale(1);
+            transition: transform 0.3s ease-out;
+        }
+        .tool-card:hover .tool-icon.crop-tool svg {
+            transform: scale(1.1);
+        }
+
+        /* HTML/CSS Styling & Animation */
+        .tool-icon.html-css {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            color: var(--secondary-color);
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+            font-size: 32px;
+            position: relative;
+            text-shadow: 0 0 5px rgba(0,0,0,0.1);
+        }
+        .tool-icon.html-css span {
+            position: absolute;
+            opacity: 1;
+            transform: translateX(0);
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+        }
+        .tool-icon.html-css .html-tag {
+            top: 0;
+            left: 0;
+        }
+        .tool-icon.html-css .css-tag {
+            bottom: 0;
+            right: 0;
+            font-size: 28px;
+        }
+        .tool-card:hover .tool-icon.html-css .html-tag {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+        .tool-card:hover .tool-icon.html-css .css-tag {
+            opacity: 0;
+            transform: translateX(10px);
+        }
+        .tool-icon.html-css::after { /* Combined icon on hover */
+            content: "{}< >";
+            position: absolute;
+            font-size: 48px;
+            color: var(--primary-color);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.4s ease-in, transform 0.4s ease-in;
+        }
+        .tool-card:hover .tool-icon.html-css::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .tools-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            .tool-card {
+                padding: 20px;
+            }
+            .tool-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 15px;
+                font-size: 38px;
+            }
+            .tool-card h2 {
+                font-size: 1.2em;
+            }
+            .tool-icon.html-css .html-tag { font-size: 28px; }
+            .tool-icon.html-css .css-tag { font-size: 24px; }
+            .tool-card:hover .tool-icon.html-css::after { font-size: 38px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Creative Toolkit</h1>
+
+    <div class="tools-grid">
+
+        <div class="tool-card">
+            <div class="tool-icon figma">
+                <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="figma-f">
+                    <path d="M12 24C12 30.6274 17.3726 36 24 36C30.6274 36 36 30.6274 36 24C36 17.3726 30.6274 12 24 12C17.3726 12 12 17.3726 12 24Z" fill="#F24E1E"/>
+                    <path d="M12 12V24C12 17.3726 17.3726 12 24 12C30.6274 12 36 17.3726 36 24H24C24 17.3726 18.6274 12 12 12Z" fill="#FF7262"/>
+                    <path d="M12 12C18.6274 12 24 17.3726 24 24H12V12Z" fill="#A259FF"/>
+                    <path d="M24 12C30.6274 12 36 17.3726 36 24V12H24V24Z" fill="#1ABCFE"/>
+                    <path d="M24 24C24 30.6274 18.6274 36 12 36V24H24Z" fill="#0ACF83"/>
+                </svg>
+            </div>
+            <h2>Figma</h2>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-icon pen-tool">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                    <path d="M12 19l7 -7l-4 -4l-7 7v4h4z" />
+                    <path d="M18 13.3l-1.5 -1.5a1.5 1.5 0 0 0 -2 0l-4 4a1.5 1.5 0 0 0 0 2l1.5 1.5" />
+                    <path d="M20 7l-2 -2a1 1 0 0 0 -2 0l-4 4a1 1 0 0 0 0 2l2 2" />
+                </svg>
+            </div>
+            <h2>Pen Tool</h2>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-icon crop-tool">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 14C3.44772 14 3 13.5523 3 13V6C3 5.44772 3.44772 5 4 5H11C11.5523 5 12 4.55228 12 4C12 3.44772 11.5523 3 11 3H4C2.34315 3 1 4.34315 1 6V13C1 14.6569 2.34315 16 4 16H11C11.5523 16 12 15.5523 12 15C12 14.4477 11.5523 14 11 14H4ZM10 19C10.5523 19 11 19.4477 11 20C11 20.5523 10.5523 21 10 21H17C18.6569 21 20 19.6569 20 18V11C20 10.4477 19.5523 10 19 10C18.4477 10 18 10.4477 18 11V18C18 18.5523 17.5523 19 17 19H10ZM14 3C14.5523 3 15 3.44772 15 4V11C15 11.5523 14.5523 12 14 12C13.4477 12 13 11.5523 13 11V4C13 3.44772 13.4477 3 14 3Z" />
+                </svg>
+            </div>
+            <h2>Crop Tool</h2>
+        </div>
+
+        <div class="tool-card">
+            <div class="tool-icon html-css">
+                <span class="html-tag">&lt;HTML&gt;</span>
+                <span class="css-tag">{CSS}</span>
+            </div>
+            <h2>HTML & CSS</h2>
+        </div>
+
+    </div>
+
+</body>
+</html>

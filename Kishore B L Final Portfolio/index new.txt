@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Work Showcase 2024</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #ffffff;
+      color: #333;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 20px 40px;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.2rem;
+    }
+    nav {
+      background: #f9f9f9;
+      padding: 10px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+    nav ul {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      list-style: none;
+    }
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #333;
+    }
+    nav a:hover {
+      color: #007bff;
+    }
+    section {
+      padding: 80px 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      border-bottom: 1px solid #eee;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    section p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .project-card {
+      background: #f2f2f2;
+      padding: 20px;
+      border-radius: 12px;
+    }
+    footer {
+      background: #000;
+      color: white;
+      text-align: center;
+      padding: 30px 10px;
+    }
+    .contact-links a {
+      color: white;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Portfolio Work Showcase 2024</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#logofolio">Logofolio</a></li>
+      <li><a href="#branding">Branding</a></li>
+      <li><a href="#social">Social Media</a></li>
+      <li><a href="#slides">Slides</a></li>
+      <li><a href="#ui">UI Design</a></li>
+    </ul>
+  </nav>
+
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I’m a multidisciplinary designer with 3.5+ years of experience working on branding, web, print, and digital design. I’ve served over 40+ clients across 12+ countries. Every idea starts with a spark — I bring it to life.</p>
+  </section>
+
+  <section id="logofolio">
+    <h2>Logo Folio</h2>
+    <div class="projects-grid">
+      <div class="project-card">Corporate Brand Logo</div>
+      <div class="project-card">Modern Tech Logo</div>
+      <div class="project-card">Creative Studio Logo</div>
+    </div>
+  </section>
+
+  <section id="branding">
+    <h2>Branding</h2>
+    <div class="projects-grid">
+      <div class="project-card">SynapAI – AI for Sales Teams</div>
+      <div class="project-card">Nexalley – Bold Digital Identity</div>
+      <div class="project-card">Megaz Solution – Marketing Agency</div>
+    </div>
+  </section>
+
+  <section id="social">
+    <h2>Social Media</h2>
+    <p>Creative visual content designed for high engagement across multiple platforms.</p>
+  </section>
+
+  <section id="slides">
+    <h2>Slide Decks & Presentations</h2>
+    <div class="projects-grid">
+      <div class="project-card">Medio Zorg – Brand Guidelines</div>
+      <div class="project-card">Nexalley – Branding Deck</div>
+      <div class="project-card">Deno – Pitch Deck</div>
+    </div>
+  </section>
+
+  <section id="ui">
+    <h2>UI Design</h2>
+    <div class="projects-grid">
+      <div class="project-card">Megaz Website</div>
+      <div class="project-card">Otara Web App</div>
+      <div class="project-card">Cosmo Software Dashboard</div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Email: mjunaid19379@gmail.com</p>
+    <div class="contact-links">
+      <a href="https://www.linkedin.com/in/muhammad-junaid-132942360">LinkedIn</a>
+      <a href="https://www.behance.net/mhmmadjunaid">Behance</a>
+      <a href="https://wa.me/+923481718552">WhatsApp</a>
+    </div>
+    <p>&copy; 2024 Portfolio by Muhammad Junaid</p>
+  </footer>
+
+</body>
+</html>

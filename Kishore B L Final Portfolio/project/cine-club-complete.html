@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cine Club - Complete App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        .page {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .page.active {
+            display: block;
+        }
+        
+        .netflix-font-light {
+            font-weight: 300;
+        }
+        
+        .netflix-font-medium {
+            font-weight: 500;
+        }
+        
+        .netflix-font-bold {
+            font-weight: 700;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .movie-card:hover {
+            transform: scale(1.02);
+            transition: transform 0.3s ease;
+        }
+        
+        input::placeholder {
+            color: #3A3939;
+            opacity: 0.7;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(119deg, #521616 14%, #B83131 100%);
+        }
+        
+        .hero-bg {
+            background: linear-gradient(0deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.2) 100%), linear-gradient(119deg, #521616 14%, #B83131 100%);
+        }
+        
+        @media (max-width: 768px) {
+            .responsive-flex {
+                flex-direction: column;
+            }
+            
+            .responsive-gap {
+                gap: 20px;
+            }
+            
+            .responsive-width {
+                width: 100%;
+                max-width: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-4 left-4 z-50 flex gap-2">
+        <button onclick="showPage('signup')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm">Sign Up</button>
+        <button onclick="showPage('choose-user')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm">Choose User</button>
+        <button onclick="showPage('home')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors text-sm">Home</button>
+    </nav>
+
+    <!-- Sign Up Page -->
+    <div id="signup" class="page active">
+        <div class="flex justify-center items-center min-h-screen p-4" style="background: rgba(66,0,0,0.91);">
+            <div class="flex flex-col lg:flex-row gap-8 w-full max-w-6xl responsive-flex responsive-gap">
+                <!-- Left Side -->
+                <div class="flex justify-center items-center flex-col gap-12 p-8 bg-[rgba(32,0,0,0.91)] rounded-2xl responsive-width">
+                    <div>
+                        <img src="https://picsum.photos/id/210/180" alt="Cine Club Logo" class="rounded-lg" />
+                    </div>
+                    <div class="text-white text-2xl lg:text-3xl netflix-font-light text-center">
+                        Join Cine Club 🎬<br />
+                        Create your free account & start watching!
+                    </div>
+                </div>
+                
+                <!-- Right Side - Form -->
+                <div class="flex flex-col gap-8 p-8 bg-[#200303] rounded-3xl flex-1">
+                    <h1 class="text-[#E4101F] text-3xl lg:text-4xl netflix-font-medium text-center">
+                        Sign Up
+                    </h1>
+                    <form class="flex flex-col gap-6 w-full" onsubmit="handleSignUp(event)">
+                        <div class="flex items-center p-4 bg-[#F9FBFC] rounded-xl">
+                            <input type="text" placeholder="Name" required class="w-full text-[#3A3939] text-sm netflix-font-light bg-transparent border-none outline-none" />
+                        </div>
+                        <div class="flex items-center p-4 bg-[#F9FBFC] rounded-xl">
+                            <input type="date" required class="w-full text-[#3A3939] text-sm netflix-font-light bg-transparent border-none outline-none" />
+                        </div>
+                        <div class="flex items-center p-4 bg-[#F9FBFC] rounded-xl">
+                            <input type="email" placeholder="Email" required class="w-full text-[#3A3939] text-sm netflix-font-light bg-transparent border-none outline-none" />
+                        </div>
+                        <div class="flex items-center p-4 bg-[#F9FBFC] rounded-xl">
+                            <input type="tel" placeholder="Mobile Number" required class="w-full text-[#3A3939] text-sm netflix-font-light bg-transparent border-none outline-none" />
+                        </div>
+                        <div class="flex items-center p-4 bg-[#F9FBFC] rounded-xl">
+                            <input type="password" placeholder="Create Password" required class="w-full text-[#3A3939] text-sm netflix-font-light bg-transparent border-none outline-none" />
+                        </div>
+                        <div class="flex items-center p-4 bg-[#F9FBFC] rounded-xl">
+                            <input type="password" placeholder="Confirm Password" required class="w-full text-[#3A3939] text-sm netflix-font-light bg-transparent border-none outline-none" />
+                        </div>
+                        <button type="submit" class="flex justify-center items-center py-3 bg-[#E4101F] rounded-xl hover:bg-[#c40e1a] transition-colors">
+                            <span class="text-[#F9FBFC] text-sm netflix-font-bold">
+                                Create Account
+                            </span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Choose User Page -->
+    <div id="choose-user" class="page">
+        <div class="w-full min-h-screen gradient-bg flex items-center justify-center p-4">
+            <div class="flex flex-col items-center gap-8 max-w-4xl w-full">
+                <div class="absolute top-4 left-4">
+                    <img src="https://picsum.photos/id/68/55" alt="LOGO" class="rounded" />
+                </div>
+                
+                <h1 class="text-white text-3xl lg:text-4xl netflix-font-medium text-center">
+                    Who is this?
+                </h1>
+                
+                <div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="flex flex-col items-center gap-2 cursor-pointer hover-scale" onclick="selectUser('Iron Man')">
+                        <img class="w-32 h-32 border-4 border-[#DE2F2F] rounded-full object-cover" src="https://picsum.photos/136/136?random=1" />
+                        <p class="text-white text-sm netflix-font-medium text-center">Iron Man</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer hover-scale" onclick="selectUser('Thor')">
+                        <img class="w-32 h-32 border-4 border-[#DE2F2F] rounded-full object-cover" src="https://picsum.photos/136/136?random=2" />
+                        <p class="text-white text-sm netflix-font-medium text-center">Thor</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer hover-scale" onclick="selectUser('Captain')">
+                        <img class="w-32 h-32 border-4 border-[#DE2F2F] rounded-full object-cover" src="https://picsum.photos/136/136?random=3" />
+                        <p class="text-white text-sm netflix-font-medium text-center">Captain</p>
+                    </div>
+                    <div class="flex flex-col items-center gap-2 cursor-pointer hover-scale" onclick="selectUser('Hulk')">
+                        <img class="w-32 h-32 border-4 border-[#DE2F2F] rounded-full object-cover" src="https://picsum.photos/136/136?random=4" />
+                        <p class="text-white text-sm netflix-font-medium text-center">Hulk</p>
+                    </div>
+                </div>
+                
+                <button class="px-6 py-2 bg-[#DE2F2F] text-white rounded-full hover:bg-[#c40e1a] transition-colors netflix-font-medium" onclick="addUser()">
+                    Add You +
+                </button>
+            </div>
+        </div>
+    </div>

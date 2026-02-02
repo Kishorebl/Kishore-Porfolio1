@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Kishore B L Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #2563eb;
+        }
+
+        /* Blog Container */
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .blog-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .blog-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .blog-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            color: #64748b;
+            padding: 8px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: #2563eb;
+            color: white;
+            border-color: #2563eb;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .blog-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .blog-content {
+            padding: 25px;
+        }
+
+        .blog-category {
+            display: inline-block;
+            background: #dbeafe;
+            color: #2563eb;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .blog-card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #94a3b8;
+        }
+
+        .read-more-btn {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-top: 15px;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .read-more-btn:hover {
+            color: #1d4ed8;
+        }
+
+        /* Featured Post */
+        .featured-post {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+            margin-bottom: 20px;
+        }
+
+        .featured-post .blog-image {
+            height: 300px;
+        }
+
+        .featured-post .blog-content {
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-post .blog-card-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .featured-post .blog-excerpt {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+        }
+
+        /* Blog Post Detail Section */
+        .blog-post-detail {
+            display: none;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+
+        .blog-post-detail.active {
+            display: block;
+        }
+
+        .blog-post-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .blog-post-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .blog-post-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+
+        .blog-post-category-large {
+            display: inline-block;
+            background: #2563eb;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .blog-post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #374151;
+        }
+
+        .blog-post-content h2 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 40px 0 20px 0;
+            padding-top: 20px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .blog-post-content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #1e293b;
+            margin: 30px 0 15px 0;
+        }
+
+        .blog-post-content p {
+            margin-bottom: 20px;
+        }
+
+        .blog-post-content ul, .blog-post-content ol {
+            margin: 20px 0;
+            padding-left: 30px;
+        }
+
+        .blog-post-content li {
+            margin-bottom: 10px;
+        }
+
+        .blog-post-content strong {
+            color: #1e293b;
+            font-weight: 600;
+        }
+
+        .back-to-blog {
+            background: #2563eb;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-bottom: 30px;
+            transition: background 0.3s;
+        }
+
+        .back-to-blog:hover {
+            background: #1d4ed8;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1e293b;
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .blog-title {
+                font-size: 2rem;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .nav-menu {
+                gap: 1rem;
+            }
+
+            .featured-post {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-post .blog-content {
+                padding: 25px;
+            }
+
+            .category-filter {
+                gap: 10px;
+            }
+
+            .category-btn {
+                padding: 6px 15px;
+                font-size: 0.9rem;
+            }
+
+            .blog-post-title {
+                font-size: 2rem;
+            }
+
+            .blog-post-meta {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .blog-post-detail {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="index.html">Kishore B L</a>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="design2.html" class="nav-link">Designs</a></li>
+                <li><a href="experience.html" class="nav-link">Experience</a></li>
+                <li><a href="education.html" class="nav-link">Education</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+                <li><a href="blog.html" class="nav-link active">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="blog-container">
+        <!-- Blog List View -->
+        <div id="blog-list-view">
+            <div class="blog-header">
+                <h1 class="blog-title">My Blog</h1>
+                <p class="blog-subtitle">
+                    Thoughts, tutorials, and insights about web development, design, and technology
+                </p>
+            </div>
+
+            <div class="category-filter">
+                <button class="category-btn active" data-category="all">All Posts</button>
+                <button class="category-btn" data-category="web-development">Web Development</button>
+                <button class="category-btn" data-category="design">Design</button>
+                <button class="category-btn" data-category="javascript">JavaScript</button>
+                <button class="category-btn" data-category="tutorials">Tutorials</button>
+                <button class="category-btn" data-category="career">Career</button>
+            </div>
+
+            <div class="blog-grid">
+                <!-- Featured Blog Post -->
+                <article class="blog-card featured-post" data-category="web-development" onclick="showBlogPost('modern-web-dev-2025')">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <span>🚀</span>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Web Development</span>
+                        <h3 class="blog-card-title">Modern Guide to Web Development in 2025</h3>
+                        <p class="blog-excerpt">
+                            A comprehensive guide covering the latest trends, technologies, and best practices in modern web development. From frameworks to deployment strategies, everything you need to know to stay ahead in 2025.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">📅 July 2025</span>
+                            <span class="blog-read-time">⏱️ 10 min read</span>
+                        </div>
+                        <span class="read-more-btn">
+                            Read Full Article →
+                        </span>
+                    </div>
+                </article>
+
+                <!-- Blog Post 1 -->
+                <article class="blog-card" data-category="web-development">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <span>📱</span>
+                    </div>
+                    <div class="blog-content">
+                        <span class="blog-category">Web Development</span>
+                        <h3 class="blog-card-title">Building Responsive Web Applications</h3>
+                        <p class="blog-excerpt">
+                            Learn the fundamentals of creating responsive web applications that work seamlessly across all devices and screen sizes.
+                        </p>
+                        <div class="blog-meta">
+                            <span class="blog-date">📅 Jan 15, 2025</span>
+                            <span class="blog-read-time">⏱️ 5 min read</span>
+                        </div>
+                        <span class="read-more-btn">
+                            Read Full Article →
+                        </span>
+                    </div>
+                </article>
